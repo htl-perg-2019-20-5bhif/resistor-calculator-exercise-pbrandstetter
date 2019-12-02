@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:ResistorCalculator"
+             mc:Ignorable="d"
+             x:Class="ResistorCalculator.ColorsToValue"
+             Title="Colors to Value">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
+        <Style TargetType="BoxView">
+            <Setter Property="WidthRequest" Value="25"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HeightRequest" Value="150"/>
+            <Setter Property="Margin" Value="0" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="15">
+                <Label Text="Color 1"/>
+                <Picker ItemsSource="{Binding Path=Lists.FirstBandList}" ItemDisplayBinding="{Binding Color}"
+                    SelectedItem="{Binding Path=FirstColor}" Title="Color 1"></Picker>
+                <Label Text="Color 2"/>
+                <Picker ItemsSource="{Binding Path=Lists.SecondBandList}" ItemDisplayBinding="{Binding Color}"
+                    SelectedItem="{Binding Path=SecondColor}" Title="Color 2"></Picker>
+                <Label Text="Color 3"/>
+                <Picker ItemsSource="{Binding Path=Lists.ThirdBandList}" ItemDisplayBinding="{Binding Color}"
+                    SelectedItem="{Binding Path=ThirdColor}" Title="Color 3"></Picker>
+                <Label Text="Color 4"/>
+                <Picker ItemsSource="{Binding Path=Lists.FourthBandList}" ItemDisplayBinding="{Binding Color}"
+                    SelectedItem="{Binding Path=FourthColor}" Title="Color 4"></Picker>
+                <Label Text="Your Result:" FontSize="Large"/>
+                
+                <Label Text="{Binding Path=Value, StringFormat='{0} Ω'}" FontSize="35">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Path=Value, StringFormat='{0} Ω'}" />
+                            <Span Text="{Binding Path=FourthColor.Value, StringFormat=' ± {0} %'}" FontSize="Large" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Text="Tap Bands to select color" />
+                <StackLayout Orientation="Horizontal" Padding="0" Margin="0,0,0,10" Spacing="0" HorizontalOptions="Center">
+                    <BoxView Color="Gray" HeightRequest="20" />
+                    <BoxView Color="RosyBrown" />
+                    <BoxView Color="RosyBrown"/>
+                    <!-- First Color -->
+                    <BoxView Color="{Binding Path=FirstColor.Color}" >
+                        <BoxView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FirstBand_Tapped"/>
+                        </BoxView.GestureRecognizers>
+                    </BoxView>
+                    <BoxView Color="RosyBrown" />
+                    <!-- Second Color -->
+                    <BoxView Color="{Binding Path=SecondColor.Color}" >
+                        <BoxView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SecondBand_Tapped"/>
+                        </BoxView.GestureRecognizers>
+                    </BoxView>
+                    <BoxView Color="RosyBrown"/>
+                    <!-- Third Color -->
+                    <BoxView Color="{Binding Path=ThirdColor.Color}" >
+                        <BoxView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ThirdBand_Tapped"/>
+                        </BoxView.GestureRecognizers>
+                    </BoxView>
+                    <BoxView Color="RosyBrown" />
+                    <BoxView Color="RosyBrown" />
+                    <!-- Fourth Color -->
+                    <BoxView Color="{Binding Path=FourthColor.Color}" >
+                        <BoxView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FourthBand_Tapped"/>
+                        </BoxView.GestureRecognizers>
+                    </BoxView>
+                    <BoxView Color="RosyBrown" />
+                    <BoxView Color="RosyBrown" />
+                    <BoxView Color="Gray" HeightRequest="20" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
